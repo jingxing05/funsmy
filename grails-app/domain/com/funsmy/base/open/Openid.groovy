@@ -11,11 +11,13 @@ class Openid {
 	String appsecret //应用密钥
 
 	static constraints = {
-		platform(nullable: false, blank: false, unique: true)
 		alias   (nullable: false, blank: false)
+		platform(nullable: false, blank: false, unique: true) 
 		isout(inList:[0,1])//默认为站外
 		apibaseuri(nullable: false, blank: false,url:true)//api地址 
 		oauthuri(nullable: false, blank: false,url:true)//获取授权地址
+		appkey()
+		appsecret()
 	}
 
 	static mapping = {

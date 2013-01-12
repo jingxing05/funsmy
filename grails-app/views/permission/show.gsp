@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="bootstrap">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'permission.label', default: 'Permission')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -42,6 +42,13 @@
 
 				<dl>
 				
+					<g:if test="${permissionInstance?.name}">
+						<dt><g:message code="permission.name.label" default="Name" /></dt>
+						
+							<dd><g:fieldValue bean="${permissionInstance}" field="name"/></dd>
+						
+					</g:if>
+				
 					<g:if test="${permissionInstance?.privilege}">
 						<dt><g:message code="permission.privilege.label" default="Privilege" /></dt>
 						
@@ -53,13 +60,6 @@
 						<dt><g:message code="permission.description.label" default="Description" /></dt>
 						
 							<dd><g:fieldValue bean="${permissionInstance}" field="description"/></dd>
-						
-					</g:if>
-				
-					<g:if test="${permissionInstance?.name}">
-						<dt><g:message code="permission.name.label" default="Name" /></dt>
-						
-							<dd><g:fieldValue bean="${permissionInstance}" field="name"/></dd>
 						
 					</g:if>
 				

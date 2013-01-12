@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="bootstrap">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'permission.label', default: 'Permission')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
@@ -44,11 +44,11 @@
 					<thead>
 						<tr>
 						
+							<g:sortableColumn property="name" title="${message(code: 'permission.name.label', default: 'Name')}" />
+						
 							<g:sortableColumn property="privilege" title="${message(code: 'permission.privilege.label', default: 'Privilege')}" />
 						
 							<g:sortableColumn property="description" title="${message(code: 'permission.description.label', default: 'Description')}" />
-						
-							<g:sortableColumn property="name" title="${message(code: 'permission.name.label', default: 'Name')}" />
 						
 							<th></th>
 						</tr>
@@ -57,14 +57,16 @@
 					<g:each in="${permissionInstanceList}" var="permissionInstance">
 						<tr>
 						
+							<td>${fieldValue(bean: permissionInstance, field: "name")}</td>
+						
 							<td>${fieldValue(bean: permissionInstance, field: "privilege")}</td>
 						
 							<td>${fieldValue(bean: permissionInstance, field: "description")}</td>
 						
-							<td>${fieldValue(bean: permissionInstance, field: "name")}</td>
-						
 							<td class="link">
-								<g:link action="show" id="${permissionInstance.id}" class="btn btn-small">Show &raquo;</g:link>
+								<g:link action="show" id="${permissionInstance.id}" class="btn btn-small">
+								<g:message code="default.show.label"  args="['']"/>
+								</g:link>
 							</td>
 						</tr>
 					</g:each>

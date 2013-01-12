@@ -9,7 +9,19 @@
 					<li
 						<%= request.forwardURI == "${createLink(uri: '/')}" ? ' class="active"' : '' %>><a
 						href="${createLink(uri: '/')}"><g:message
-								code="default.home.label" /></a></li>
+								code="default.home.label" /></a>
+								</li>
+								
+								<g:each var="c"
+							in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+							<li <%= ${controllerName  == "${c.logicalPropertyName}" ? ' class="active"' : '' %>
+							><g:link controller="${c.logicalPropertyName}">
+									
+									<g:message code="${c.logicalPropertyName}.label" default="${c.naturalName}"/>
+									
+								</g:link></li>
+						</g:each>
+								
 					<shiro:isLoggedIn>
 						<li>您好!<shiro:principal />
 						</li>
