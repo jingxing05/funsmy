@@ -2,21 +2,21 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: openidInstance, field: 'platform', 'error')} required">
-	<label for="platform">
-		<g:message code="openid.platform.label" default="Platform" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="platform" value="${fieldValue(bean: openidInstance, field: 'platform')}" />
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: openidInstance, field: 'alias', 'error')} required">
 	<label for="alias">
 		<g:message code="openid.alias.label" default="Alias" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="alias" value="${fieldValue(bean: openidInstance, field: 'alias')}" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: openidInstance, field: 'platform', 'error')} required">
+	<label for="platform">
+		<g:message code="openid.platform.label" default="Platform" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="platform" value="${fieldValue(bean: openidInstance, field: 'platform')}" />
 
 </div>
 
@@ -44,6 +44,24 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="oauthuri" value="${fieldValue(bean: openidInstance, field: 'oauthuri')}" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: openidInstance, field: 'appkey', 'error')} ">
+	<label for="appkey">
+		<g:message code="openid.appkey.label" default="Appkey" />
+		
+	</label>
+	<g:textField name="appkey" value="${fieldValue(bean: openidInstance, field: 'appkey')}" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: openidInstance, field: 'appsecrets', 'error')} ">
+	<label for="appsecrets">
+		<g:message code="openid.appsecrets.label" default="Appsecrets" />
+		
+	</label>
+	<g:textField name="appsecrets" value="${fieldValue(bean: openidInstance, field: 'appsecrets')}" />
 
 </div>
 

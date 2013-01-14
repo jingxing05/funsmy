@@ -14,7 +14,7 @@
 								
 								<g:each var="c"
 							in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-							<li <%= ${controllerName  == "${c.logicalPropertyName}" ? ' class="active"' : '' %>
+							<li <%= c.logicalPropertyName == controllerName ? ' class="active"' : '' %>
 							><g:link controller="${c.logicalPropertyName}">
 									
 									<g:message code="${c.logicalPropertyName}.label" default="${c.naturalName}"/>

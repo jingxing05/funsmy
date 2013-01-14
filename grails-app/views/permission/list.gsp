@@ -65,7 +65,7 @@
 						
 							<td class="link">
 								<g:link action="show" id="${permissionInstance.id}" class="btn btn-small">
-								<g:message code="default.show.label"  args="['']"/>
+								<g:message code="default.show.label" args="['']" />
 								</g:link>
 							</td>
 						</tr>

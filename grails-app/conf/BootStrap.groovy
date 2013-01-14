@@ -9,7 +9,10 @@ class BootStrap {
 	def init = { servletContext ->
 
 		def privilegeall = new Permission(name: 'all', privilege:'*:*',description:'全部权限')
-		privilegeall.save()
+		privilegeall.save();
+		
+		def defaultprivilege = new Permission(name:'default', privilege:'*:index',description:'index权限')
+		defaultprivilege.save()
 
 		def adminRole = new Role(name: 'Admin',alias:'管理员')
 		adminRole.addToPermissions(privilegeall)
@@ -29,17 +32,27 @@ class BootStrap {
 				alias:'腾讯微博',
 				isout:1,
 				apibaseuri:'https://open.t.qq.com/',
-				oauthuri:'https://open.t.qq.com/cgi-bin/oauth2/authorize'
+				oauthuri:'https://open.t.qq.com/cgi-bin/oauth2/authorize',
+				appkey:'801294442',
+				appsecrets:'1e1861d695a904b4f2128bc4632a2da4'
 				)
-		openplatform.save()
+		openplatform.save();
+
+		if(openplatform.hasErrors()){
+			println openplatform.errors
+		}
+
 		openplatform = new Openid(
-				platform:'sinat',
+				platform : 'sina',
 				alias:'新浪微博',
 				isout:1,
-				apibaseuri:'https://api.weibo.com/2/',
-				oauthuri:'https://api.weibo.com/oauth2/authorize'
+				apibaseuri:'https://open.weibo.com/',
+				oauthuri:'https://open.t.qq.com/cgi-bin/oauth2/authorize',
+				appkey:'33333',
+				appsecrets:'1e1861d695a904b4f2128bc4632a2da4'
 				)
-		openplatform.save()
+		openplatform.save();
+
 		if(openplatform.hasErrors()){
 			println openplatform.errors
 		}

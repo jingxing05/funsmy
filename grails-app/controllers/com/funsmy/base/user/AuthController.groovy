@@ -6,6 +6,7 @@ import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.SavedRequest
 import org.apache.shiro.web.util.WebUtils
 import org.apache.shiro.grails.ConfigUtils
+import org.apache.commons.lang.RandomStringUtils
 import com.funsmy.base.open.Openid
 class AuthController {
     def shiroSecurityManager
@@ -91,8 +92,32 @@ class AuthController {
 	 * 验证码 怎么弄
 	 */
 	def regist = { 
-		 
-		[platforms: Openid.list(params)] 
+		switch (request.method) {
+			case 'GET': 
+			    session["verifycode"] = RandomStringUtils.randomAlphanumeric(4);
+				[userInstance:new User(params),platforms: Openid.list(params)]
+				break
+			case 'POST':
+			    def userInstance = new User(params)
+			    //密码是否一致
+			    if(params.passwordhash!=params.repasswordhash){ 
+					return [userInstance: userInstance, repassworderror:'密码不一致']
+				}
+			    //验证码输对了没？
+				if(params.verifycode!=session["verifycode"]){
+					flash.message='验证码输入错误,区分大小写' 
+					return [userInstance: userInstance, verifycodeerror:'验证码输入错误,区分大小写']
+			    }
+				
+				if (!userInstance.save(flush: true)) {
+					render view: 'regist', model: [userInstance: userInstance]
+					return
+				}
+				session["verifycode"] = null;
+				flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.username])
+				redirect controller:'user',action: 'show', id: userInstance.id
+				break
+			} 
 	}
 	
 	/**

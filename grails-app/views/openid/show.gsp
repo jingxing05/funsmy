@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="bootstrap">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'openid.label', default: 'Openid')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -42,17 +42,17 @@
 
 				<dl>
 				
-					<g:if test="${openidInstance?.platform}">
-						<dt><g:message code="openid.platform.label" default="Platform" /></dt>
-						
-							<dd><g:fieldValue bean="${openidInstance}" field="platform"/></dd>
-						
-					</g:if>
-				
 					<g:if test="${openidInstance?.alias}">
 						<dt><g:message code="openid.alias.label" default="Alias" /></dt>
 						
 							<dd><g:fieldValue bean="${openidInstance}" field="alias"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${openidInstance?.platform}">
+						<dt><g:message code="openid.platform.label" default="Platform" /></dt>
+						
+							<dd><g:fieldValue bean="${openidInstance}" field="platform"/></dd>
 						
 					</g:if>
 				
@@ -74,6 +74,20 @@
 						<dt><g:message code="openid.oauthuri.label" default="Oauthuri" /></dt>
 						
 							<dd><g:fieldValue bean="${openidInstance}" field="oauthuri"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${openidInstance?.appkey}">
+						<dt><g:message code="openid.appkey.label" default="Appkey" /></dt>
+						
+							<dd><g:fieldValue bean="${openidInstance}" field="appkey"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${openidInstance?.appsecrets}">
+						<dt><g:message code="openid.appsecrets.label" default="Appsecrets" /></dt>
+						
+							<dd><g:fieldValue bean="${openidInstance}" field="appsecrets"/></dd>
 						
 					</g:if>
 				

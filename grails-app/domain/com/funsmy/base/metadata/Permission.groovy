@@ -7,7 +7,7 @@ package com.funsmy.base.metadata
  */
 class Permission {
 	String name //名称限为英语
-	String privilege //具体权限的字符串
+	String privilege = '*:index' //具体权限的字符串
 	String description //权限描述
 
     static constraints = {

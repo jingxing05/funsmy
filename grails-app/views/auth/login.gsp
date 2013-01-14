@@ -21,29 +21,29 @@
 		</g:if>
 		<div class="control-group">
 			<label class="control-label" for="inputusername"><g:message
-					code="user.username" /></label>
+					code="user.username.label" /></label>
 			<div class="controls">
 				<input type="text" id="inputusername"
-					placeholder="<g:message code="auth.regform.username" />"
+					placeholder="<g:message code="auth.regform.username.label" />"
 					name="username" value="${username}">
 			</div>
 		</div>
 
 		<div class="control-group">
 			<label class="control-label" for="inputpassword"><g:message
-					code="user.passwordhash" /></label>
+					code="user.passwordhash.label" /></label>
 			<div class="controls">
 				<input type="password" id="inputpassword"
-					placeholder="<g:message code="auth.regform.password" />"
+					placeholder="<g:message code="auth.regform.password.label" />"
 					name="password">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label" for="inputverify"><g:message
-					code="auth.verifycode" /></label>
+					code="auth.verifycode.label" /></label>
 			<div class="controls">
 				<input type="text" id="inputverify"
-					placeholder="<g:message code="auth.regform.verify" />"
+					placeholder="<g:message code="auth.regform.verify.label" />"
 					name="verify">
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="checkbox"> <input type="checkbox"
-					name="rememberme"> <g:message code="auth.rememberme" />
+					name="rememberme"> <g:message code="auth.rememberme.label" />
 				</label>
 				<button type="submit" class="btn">
 					<g:message code="auth.login" />

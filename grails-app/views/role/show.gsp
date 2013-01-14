@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="bootstrap">
+		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'role.label', default: 'Role')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
@@ -42,17 +42,17 @@
 
 				<dl>
 				
-					<g:if test="${roleInstance?.name}">
-						<dt><g:message code="role.name.label" default="Name" /></dt>
-						
-							<dd><g:fieldValue bean="${roleInstance}" field="name"/></dd>
-						
-					</g:if>
-				
 					<g:if test="${roleInstance?.alias}">
 						<dt><g:message code="role.alias.label" default="Alias" /></dt>
 						
 							<dd><g:fieldValue bean="${roleInstance}" field="alias"/></dd>
+						
+					</g:if>
+				
+					<g:if test="${roleInstance?.name}">
+						<dt><g:message code="role.name.label" default="Name" /></dt>
+						
+							<dd><g:fieldValue bean="${roleInstance}" field="name"/></dd>
 						
 					</g:if>
 				
