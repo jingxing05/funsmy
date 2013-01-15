@@ -122,11 +122,11 @@
 					</p>
 					<ul class="nav nav-list">
 						<g:each var="c" in="${platforms}">
-							<li><a href="${c.oauthuri}" title=""> ${c.alias}
-							</a></li>
+							<li><g:link action="oauth" params="[provider:c.platform]"
+									title="${c.alias}">
+									${c.alias}
+								</g:link></li>
 						</g:each>
-						<li><oauth:connect provider="qqt">腾讯微博</oauth:connect></li>
-
 					</ul>
 				</div>
 			</div>

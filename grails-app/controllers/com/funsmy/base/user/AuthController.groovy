@@ -6,8 +6,15 @@ import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.SavedRequest
 import org.apache.shiro.web.util.WebUtils
 import org.apache.shiro.grails.ConfigUtils
-import org.apache.commons.lang.RandomStringUtils
-import com.funsmy.base.open.Openid
+import org.apache.commons.lang.RandomStringUtils 
+import org.scribe.builder.ServiceBuilder
+import org.scribe.model.OAuthConfig
+import org.scribe.model.Token
+import org.scribe.model.Verifier
+import org.scribe.oauth.OAuthService
+
+import com.funsmy.base.open.Openid 
+
 class AuthController {
     def shiroSecurityManager
 
@@ -126,5 +133,51 @@ class AuthController {
 	def getverify = {
 		
 		
+	} 
+	
+	
+	/**
+	 * 用第三方帐号登录
+	 */
+	def oauth = {
+		//获取配置
+		Map provider = grailsApplication.config.oauth.providers[params.provider]
+		
+		OAuthService service = new ServiceBuilder()
+		 .provider(provider.api)
+		//.provider(org.scribe.builder.api.LinkedInApi.class)
+		.apiKey(provider.key)
+		.apiSecret(provider.secret)
+		.callback(provider.callback)
+		.build();
+		
+		Token requestToken = null 
+		//OAuthConfig config = new OAuthConfig(provider.key,provider.secret)
+		String authUrl = service.getAuthorizationUrl(null)
+		redirect url:authUrl
 	}
+	
+	/**
+	 * 用第三方帐号登录
+	 */
+	def callback = {
+		  
+		//获取配置
+		Map provider = grailsApplication.config.oauth.providers[params.provider]
+		 
+		OAuthService service = new ServiceBuilder()
+		 .provider(provider.api)
+		//.provider(org.scribe.builder.api.LinkedInApi.class)
+		.apiKey(provider.key)
+		.apiSecret(provider.secret)
+		.callback(provider.callback)
+		.build(); 
+		Token requestToken = null
+		Verifier v = new Verifier("verifier you got from the user");
+		Token accessToken = service.getAccessToken(requestToken, v); // the requestToken you had from step 2
+		println('ddddddd' )
+		
+		render accessToken  
+	}
+		  
 }

@@ -12,6 +12,7 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+
 grails.project.groupId = funsmy // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -104,31 +105,41 @@ site.infor.description = '川流网是集社交(SNS)、购物于一体的社会�
 
 /**
  * 外站帐号key
- * 
+ * API Key: 
+8dlvws442tnk 
+ Secret Key: 
+9ChfJzwuMeRdffz3 
+ OAuth User Token: 
+d75300ee-170a-4443-adfd-d98a24eba043 
+ OAuth User Secret: 
+61f483bc-b887-43e1-9493-b17fc3dfad0c  
+ 
  */
-oauth {
-    providers { 
-        qqt {
-            provider = org.scribe.builder.api.TwitterApi
-            key = '801294442'
-            secret = '1e1861d695a904b4f2128bc4632a2da4'
-            callback = "${grails.serverURL}/auth/oauth/qqt/callback"
-            successUri = '/auth/oauth/success?provider=qqt'
-            failureUri = '/auth/unauthorized'
-        }
-    }
-}
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+oauth { 
+		providers {
+			qqt{
+				//api =  QqtApi
+				api = com.funsmy.utils.oauth.QqtApi
+				key = '801294442'
+				secret = '1e1861d695a904b4f2128bc4632a2da4'
+				//scope = 'my-scope'
+				signatureType = SignatureType.QueryString
+				callback =  "http://localhost:8080/funsmy/auth/callback?provider=qqt"
+				//successUri = '/oauth/success?provider=qqt'
+				//failureUri = '/oauth/unauthorized'
+			} 
+			sinat{
+				//api =  QqtApi
+				api = 'org.scribe.builder.api.LinkedInApi'
+				key = '8dlvws442tnk'
+				secret = '9ChfJzwuMeRdffz3'
+				//scope = 'my-scope'
+				signatureType = SignatureType.QueryString
+				callback = "${grails.serverURL}/auth/callback?provider=sinat"
+				//successUri = '/oauth/success?provider=qqt'
+				//failureUri = '/oauth/unauthorized'
+			}
+		} 
+		connectTimeout = 5000
+		receiveTimeout = 5000 
+} 
