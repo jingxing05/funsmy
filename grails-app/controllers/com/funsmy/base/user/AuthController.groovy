@@ -6,13 +6,7 @@ import org.apache.shiro.authc.UsernamePasswordToken
 import org.apache.shiro.web.util.SavedRequest
 import org.apache.shiro.web.util.WebUtils
 import org.apache.shiro.grails.ConfigUtils
-import org.apache.commons.lang.RandomStringUtils 
-import org.scribe.builder.ServiceBuilder
-import org.scribe.model.OAuthConfig
-import org.scribe.model.Token
-import org.scribe.model.Verifier
-import org.scribe.oauth.OAuthService
-
+import org.apache.commons.lang.RandomStringUtils  
 import com.funsmy.base.open.Openid 
 
 class AuthController {
@@ -88,9 +82,7 @@ class AuthController {
         ConfigUtils.removePrincipal(principal)
     }
 
-    def unauthorized = {
-        render "You do not have permission to access this page."
-    }
+    
 	
 	/**
 	 * 注册页面
@@ -136,48 +128,50 @@ class AuthController {
 	} 
 	
 	
-	/**
-	 * 用第三方帐号登录
-	 */
-	def oauth = {
-		//获取配置
-		Map provider = grailsApplication.config.oauth.providers[params.provider]
-		
-		OAuthService service = new ServiceBuilder()
-		 .provider(provider.api)
-		//.provider(org.scribe.builder.api.LinkedInApi.class)
-		.apiKey(provider.key)
-		.apiSecret(provider.secret)
-		.callback(provider.callback)
-		.build();
-		
-		Token requestToken = null 
-		//OAuthConfig config = new OAuthConfig(provider.key,provider.secret)
-		String authUrl = service.getAuthorizationUrl(null)
-		redirect url:authUrl
-	}
-	
-	/**
-	 * 用第三方帐号登录
-	 */
-	def callback = {
-		  
-		//获取配置
-		Map provider = grailsApplication.config.oauth.providers[params.provider]
+	 def oauthbind = {
+		 //能到这个页面说明获取到了授权  
+		 switch (request.method) {
+			 case 'GET'://显示绑定页面
+			     //如果已经绑定了 则跳转至 targetUri，否则显示 绑定页面
+			     //解析 原始response：access_token=0681ca90161bcfb7c1b43717b8504fae&expires_in=1209600&refresh_token=2e2bc6c24a96a9ee3795795e9c97e5d8&openid=2eb90c6b3e8238ee80e01839a94ce7f6&name=jinxing05&nick=曾庆峰&state=
+			 
+			     def bind = parseaccesstokenRespone((session[params.provider + ':oasAccessToken']).getRawResponse())
+			 
+			     [bind:bind]
+			     //获取用户的信息
+				 break
+			 case 'POST'://绑定帐号 
+				 redirect controller:'user',action: 'show', id: userInstance.id
+				 break
+			 }
 		 
-		OAuthService service = new ServiceBuilder()
-		 .provider(provider.api)
-		//.provider(org.scribe.builder.api.LinkedInApi.class)
-		.apiKey(provider.key)
-		.apiSecret(provider.secret)
-		.callback(provider.callback)
-		.build(); 
-		Token requestToken = null
-		Verifier v = new Verifier("verifier you got from the user");
-		Token accessToken = service.getAccessToken(requestToken, v); // the requestToken you had from step 2
-		println('ddddddd' )
-		
-		render accessToken  
-	}
+		 
+		  
+	 }
+	 
+	 /**
+	  * 登录或授权失败
+	  */
+	 def unauthorized = {
+		 render "You do not have permission to access this page."
+	 }
+	 
+	 /**
+	  * 解析获取授权时返回的字符串
+	  * @param rawresponse
+	  * @return 键值对
+	  */
+	 private Map parseaccesstokenRespone(String rawresponse){
+//		 def rawarrays = rawresponse.replace('=', ':')
+//		 rawarrays = rawarrays.split('&')
+		 Map bind = [:]
+		def rawarrays = (rawresponse+'0000').split('&')
+		 rawarrays.each {entry->
+			 entry = entry.split('=')
+			 print entry
+			 bind.put(entry[0],entry[1])
+		 }
+		 return bind
+	 }
 		  
 }

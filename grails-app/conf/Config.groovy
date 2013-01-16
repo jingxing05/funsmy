@@ -12,6 +12,8 @@
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
 
+import org.scribe.model.SignatureType
+
 
 grails.project.groupId = funsmy // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
@@ -124,20 +126,20 @@ oauth {
 				secret = '1e1861d695a904b4f2128bc4632a2da4'
 				//scope = 'my-scope'
 				signatureType = SignatureType.QueryString
-				callback =  "http://localhost:8080/funsmy/auth/callback?provider=qqt"
-				//successUri = '/oauth/success?provider=qqt'
-				//failureUri = '/oauth/unauthorized'
+				callback =  "http://localhost:8080/funsmy/oauth/qqt/callback"
+				successUri = '/auth/oauthbind?provider=qqt'
+				failureUri = '/auth/unauthorized'
 			} 
-			sinat{
+			sina{
 				//api =  QqtApi
-				api = 'org.scribe.builder.api.LinkedInApi'
+				api = org.scribe.builder.api.LinkedInApi
 				key = '8dlvws442tnk'
 				secret = '9ChfJzwuMeRdffz3'
 				//scope = 'my-scope'
 				signatureType = SignatureType.QueryString
-				callback = "${grails.serverURL}/auth/callback?provider=sinat"
-				//successUri = '/oauth/success?provider=qqt'
-				//failureUri = '/oauth/unauthorized'
+				callback = "http://localhost:8080/funsmy/oauth/sina/callback"
+				successUri = '/auth/oauthbind?provider=sina'
+				failureUri = '/auth/unauthorized'
 			}
 		} 
 		connectTimeout = 5000

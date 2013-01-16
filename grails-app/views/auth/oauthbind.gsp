@@ -2,39 +2,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="layout" content="main" />
-<title><g:message code="auth.regist" /></title>
+<title><g:message code="auth.oauthbind" /></title>
 </head>
 <body>
 	<div class="row-fluid">
-
-		<!-- 推荐外站快速登录方式 -->
-		<section id="opensitequicklogin" class="span6">
-			<div class="row-fluid" >
-				<div class="span6">
-					<h2>
-						<g:message code="auth.openidlogin" />
-					</h2>
-					<p>
-						<g:message code="auth.openidlogininfor" />
-					</p>
-					<ul class="nav nav-list">
-						<g:each var="c" in="${platforms}">
-							<li><oauth:connect provider="${c.platform}"
-									title="${c.alias}">
-									${c.alias}
-								</oauth:connect></li>
-						</g:each>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<!-- 当然要提供注册框 -->
-		<section id="userregistinput" class="span6"  style="border: 2px solid;">
-			<h2>
-				<g:message code="auth.registlogin" />
-			</h2>
-			<g:form action="regist" class="form-horizontal">
+		<!-- 左边注册框 -->
+		<section id="userregistinput" class="span6">
+			<h3>欢迎  ${bind?.nick} 来到本站，感谢您将 @ ${bind.name}绑定到本站</h3>
+			<g:form action="oauthbind" class="form-horizontal">
 				<input type="hidden" name="targetUri" value="${targetUri}" />
+				<input type="hidden" name="openid" value="${bind?.openid}" />
+				<input type="hidden" name="name" value="${bind?.name}" />
 				<div
 					class="control-group ${hasErrors(bean: userInstance, field: 'email', 'error')}">
 					<label class="control-label" for="email"><g:message
@@ -131,8 +109,20 @@
 						<g:message code="auth.regist" />
 					</button>
 				</div>
+
+
 			</g:form>
 		</section>
+		<section id="userregistinput" class="span6">
+			<div class="hero-unit">
+				<h3>绑定说明</h3>
+				<p>腾讯微博帐号</p>
+				<p>新浪微博帐号</p>
+				<p>其他</p>
+				<p>本站帐号之间的对应关系</p> 
+			</div>
+		</section>
+
 	</div>
 </body>
 </html>
