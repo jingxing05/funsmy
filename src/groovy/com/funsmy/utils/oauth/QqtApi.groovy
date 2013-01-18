@@ -11,7 +11,7 @@ import org.scribe.model.Verb
 import org.scribe.utils.OAuthEncoder
 
 class QqtApi  extends DefaultApi20{
-	private static final String AUTHORIZE_URL = "https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s&state=%s";
+	private static final String AUTHORIZE_URL = "https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s";
 	//private static final String SCOPED_AUTHORIZE_URL = AUTHORIZE_URL + "&scope=%s";
 
 
@@ -29,7 +29,8 @@ class QqtApi  extends DefaultApi20{
 	@Override
 	public String getAccessTokenEndpoint()
 	{
-		return "https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&grant_type=authorization_code&code=%s";
+		
+		return "https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&redirect_uri=%s&grant_type=authorization_code&code=%s&state=" +Math.randomNumberGenerator.nextInt();
 	}
 
 	@Override
@@ -42,7 +43,7 @@ class QqtApi  extends DefaultApi20{
 		}
 		else
 		{
-			return String.format(AUTHORIZE_URL, config.getApiKey(), OAuthEncoder.encode(config.getCallback()), Math.randomNumberGenerator.nextInt());
+			return String.format(AUTHORIZE_URL, config.getApiKey(), OAuthEncoder.encode(config.getCallback()));
 		}
 	}
 }

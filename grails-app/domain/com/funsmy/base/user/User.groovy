@@ -21,4 +21,11 @@ class User {
 	def beforeInsert = {
 		    passwordhash = new Sha512Hash(passwordhash).toHex()
 		}
+	
+	/**
+	 * tostring 方法
+	 */
+	String toString(){
+		return username
+	}
 }

@@ -120,8 +120,8 @@ d75300ee-170a-4443-adfd-d98a24eba043
 oauth { 
 		providers {
 			qqt{
-				//api =  QqtApi
-				api = com.funsmy.utils.oauth.QqtApi
+				alias='腾讯微博'
+				api = com.funsmy.utils.oauth.QqtApi 
 				key = '801294442'
 				secret = '1e1861d695a904b4f2128bc4632a2da4'
 				//scope = 'my-scope'
@@ -130,9 +130,9 @@ oauth {
 				successUri = '/auth/oauthbind?provider=qqt'
 				failureUri = '/auth/unauthorized'
 			} 
-			sina{
-				//api =  QqtApi
-				api = org.scribe.builder.api.LinkedInApi
+			sina{ 
+				alias='新浪微博'
+				api = org.scribe.builder.api.LinkedInApi 
 				key = '8dlvws442tnk'
 				secret = '9ChfJzwuMeRdffz3'
 				//scope = 'my-scope'

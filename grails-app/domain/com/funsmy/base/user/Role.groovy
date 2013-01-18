@@ -7,7 +7,8 @@ class Role {
 
     static constraints = {
 		alias(unique: true,size:1..10)
-        name(nullable: false, blank: false, unique: true) 
+        name(nullable: false, blank: false, unique: true)
+        permissions()
     }
 	
 	String toString(){

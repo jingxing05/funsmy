@@ -5,28 +5,10 @@
 <title><g:message code="auth.regist" /></title>
 </head>
 <body>
-	<div class="row-fluid">
-
+	<div class="row-fluid"> 
 		<!-- 推荐外站快速登录方式 -->
 		<section id="opensitequicklogin" class="span6">
-			<div class="row-fluid" >
-				<div class="span6">
-					<h2>
-						<g:message code="auth.openidlogin" />
-					</h2>
-					<p>
-						<g:message code="auth.openidlogininfor" />
-					</p>
-					<ul class="nav nav-list">
-						<g:each var="c" in="${platforms}">
-							<li><oauth:connect provider="${c.platform}"
-									title="${c.alias}">
-									${c.alias}
-								</oauth:connect></li>
-						</g:each>
-					</ul>
-				</div>
-			</div>
+			 <g:render template="oauthproviders" />
 		</section>
 		<!-- 当然要提供注册框 -->
 		<section id="userregistinput" class="span6"  style="border: 2px solid;">

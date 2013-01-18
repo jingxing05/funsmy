@@ -1,9 +1,9 @@
-<%@ page import="com.funsmy.base.open.Openid" %>
+<%@ page import="com.funsmy.base.user.Userprofile" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'openid.label', default: 'Openid')}" />
+		<g:set var="entityName" value="${message(code: 'userprofile.label', default: 'Userprofile')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -39,10 +39,10 @@
 				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
 				</g:if>
 
-				<g:hasErrors bean="${openidInstance}">
+				<g:hasErrors bean="${userprofileInstance}">
 				<bootstrap:alert class="alert-error">
 				<ul>
-					<g:eachError bean="${openidInstance}" var="error">
+					<g:eachError bean="${userprofileInstance}" var="error">
 					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 					</g:eachError>
 				</ul>
@@ -50,10 +50,10 @@
 				</g:hasErrors>
 
 				<fieldset>
-					<g:form class="form-horizontal" action="edit" id="${openidInstance?.id}" >
-						<g:hiddenField name="version" value="${openidInstance?.version}" />
+					<g:form class="form-horizontal" action="edit" id="${userprofileInstance?.id}" >
+						<g:hiddenField name="version" value="${userprofileInstance?.version}" />
 						<fieldset>
-							<f:all bean="openidInstance"/>
+							<f:all bean="userprofileInstance"/>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">
 									<i class="icon-ok icon-white"></i>

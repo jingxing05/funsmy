@@ -1,5 +1,5 @@
 import com.funsmy.base.metadata.Permission
-import com.funsmy.base.open.Openid
+import com.funsmy.base.user.Userbind
 import com.funsmy.base.user.Role
 import com.funsmy.base.user.User
 import org.apache.shiro.crypto.hash.Sha512Hash
@@ -10,7 +10,7 @@ class BootStrap {
 
 		def privilegeall = new Permission(name: 'all', privilege:'*:*',description:'全部权限')
 		privilegeall.save();
-		
+
 		def defaultprivilege = new Permission(name:'default', privilege:'*:index',description:'index权限')
 		defaultprivilege.save()
 
@@ -27,35 +27,28 @@ class BootStrap {
 		user.addToRoles(adminRole)
 		user.save();
 
-		def openplatform = new Openid(
-				platform:'qqt',
-				alias:'腾讯微博',
-				isout:1,
-				apibaseuri:'https://open.t.qq.com/',
-				oauthuri:'https://open.t.qq.com/cgi-bin/oauth2/authorize',
-				appkey:'801294442',
-				appsecrets:'1e1861d695a904b4f2128bc4632a2da4'
+		user = new User(
+				email:'t@t.com',
+				username: "qfeng",
+				passwordhash: '123123',
+				sex:0
+				);
+		user.addToRoles(adminRole)
+		user.save();
+
+		def openplatform = new Userbind(
+				user:user,
+				provider:'qqt',
+				uidstr:'2EB90C6B3E8238EE80E01839A94CE7F6',
+				accesstoken:'9b38646d3e55421a4ccc058e562b1bd8',
+				lasttokentime:new Date(),
+				expiresin:1209600,
 				)
 		openplatform.save();
 
 		if(openplatform.hasErrors()){
 			println openplatform.errors
-		}
-
-		openplatform = new Openid(
-				platform : 'sina',
-				alias:'新浪微博',
-				isout:1,
-				apibaseuri:'https://open.weibo.com/',
-				oauthuri:'https://open.t.qq.com/cgi-bin/oauth2/authorize',
-				appkey:'33333',
-				appsecrets:'1e1861d695a904b4f2128bc4632a2da4'
-				)
-		openplatform.save();
-
-		if(openplatform.hasErrors()){
-			println openplatform.errors
-		}
+		} 
 	}
 	def destroy = {
 	}

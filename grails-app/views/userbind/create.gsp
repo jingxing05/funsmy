@@ -1,9 +1,9 @@
-<%@ page import="com.funsmy.base.open.Openid" %>
+<%@ page import="com.funsmy.base.user.Userbind" %>
 <!doctype html>
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'openid.label', default: 'Openid')}" />
+		<g:set var="entityName" value="${message(code: 'userbind.label', default: 'Userbind')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -39,10 +39,10 @@
 				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
 				</g:if>
 
-				<g:hasErrors bean="${openidInstance}">
+				<g:hasErrors bean="${userbindInstance}">
 				<bootstrap:alert class="alert-error">
 				<ul>
-					<g:eachError bean="${openidInstance}" var="error">
+					<g:eachError bean="${userbindInstance}" var="error">
 					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 					</g:eachError>
 				</ul>
@@ -52,7 +52,7 @@
 				<fieldset>
 					<g:form class="form-horizontal" action="create" >
 						<fieldset>
-							<f:all bean="openidInstance"/>
+							<f:all bean="userbindInstance"/>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">
 									<i class="icon-ok icon-white"></i>

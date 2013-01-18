@@ -1,13 +1,12 @@
-@artifact.package
-/**
- * 在这描述该领域类 主要内容
- * @author qingfeng
- * modify log:
- */
-@class @artifact.name@ {
+@artifact.package@class @artifact.name@ {
+	/**
+	 * 在这描述该领域类的主要内容
+	 * @author qingfeng
+	 * modify log:
+	 */
 	//基本字段
 	//String name //名称
-
+	
 	//字段约束
     static constraints = {
 		//name(nullable: false, blank: false, unique: true,email:true,size:1..50)
